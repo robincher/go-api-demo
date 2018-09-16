@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// A Person entity
 type Person struct {
 	ID        string   `json:"id,omitempty"`
 	Firstname string   `json:"firstname,omitempty"`
@@ -15,6 +16,7 @@ type Person struct {
 	Address   *Address `json:"address,omitempty"`
 }
 
+// An Address entity that consits of City and State
 type Address struct {
 	City  string `json:"city,omitempty"`
 	State string `json:"state,omitempty"`
