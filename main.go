@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/robincher/go-api-example/common"
 	configClass "github.com/robincher/go-api-example/config"
 	daoClass "github.com/robincher/go-api-example/dao"
 	model "github.com/robincher/go-api-example/model"
@@ -122,6 +123,7 @@ func init() {
 	dao.Server = config.Server
 	dao.Database = config.Database
 	dao.Connect()
+
 }
 
 func respondWithError(w http.ResponseWriter, code int, msg string) {
@@ -138,6 +140,9 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 // Main function
 func main() {
 	router := mux.NewRouter()
+
+	session := common.GetMongoSession()
+	defer session.Close()
 
 	//Mock Response for People
 	people = append(people, model.Person{ID: "1", Firstname: "John", Lastname: "Cena", Address: &model.Address{City: "City X", State: "State X"}})
